@@ -1,3 +1,6 @@
+//node app  --length=12 --special=2 --digits=3 --uppercase=3
+//result: xbpyKMWxhmdq#$766
+//also added default parameters 
 var argv = require('minimist')(process.argv.slice(2));
 
 
