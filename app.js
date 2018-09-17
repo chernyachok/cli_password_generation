@@ -1,7 +1,5 @@
 //node app also with default parameters
-//check example.png
-var argv = require('minimist')(process.argv.slice(2));
-
+var program = require('commander');
 
 var generateString = (def_length=8, special = 1, digits = 1, uppercase = 1)=> {
   var text = "";
@@ -25,15 +23,26 @@ var generateString = (def_length=8, special = 1, digits = 1, uppercase = 1)=> {
   return text;
 }
 
+program
+  .version('0.1.0')
+  .option('-l, --length <n>', 'option length')
+  .option('-s, --special <n>', 'special chars')
+  .option('-d, --digits <n>', 'added digits')
+  .option('-u, --uppercase <n>', 'uppercased')
+  .parse(process.argv);
 
-var sum =(argv.special+ argv.digits + argv.uppercase)
-if(argv.length < 8){
-  console.log('ERROR minimal length is 8 characters');
-}else if (sum>argv.length) {
-  console.log('ERROR password length cannot be less than'+sum)
-}
+//console.log(generateString(program.length, program.special, program.digits, program.uppercase))
+  let length = parseInt(program.length) || 8;
+  let special = parseInt(program.special) || 1;
+  let digits = parseInt(program.digits) || 1;
+  let uppercase = parseInt(program.uppercase) || 1;
 
-else{
-  console.log(generateString(argv.length, argv.special, argv.digits, argv.uppercase))
+  let sum =special+digits+uppercase;
 
-}
+  if(length<8){
+    console.log('ERROR minimal length is 8 characters')
+  }else if (sum > length) {
+    console.log('ERROR too low characters')
+  }else{
+    console.log(generateString(length, special, digits, uppercase))
+  }
