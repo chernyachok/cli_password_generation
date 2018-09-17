@@ -1,3 +1,5 @@
+//node app also with default parameters
+//check example.png
 var argv = require('minimist')(process.argv.slice(2));
 
 
